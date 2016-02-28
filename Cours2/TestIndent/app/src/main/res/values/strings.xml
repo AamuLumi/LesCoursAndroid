@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TestIndent</string>
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_my">MyActivity</string>
+    <string name="mainActivityPresentation">Label[i] est une association d\'informatique.</string>
+    <string name="mainActivityButtonMoreInfos">Plus d\'infos</string>
+    <string name="detailsActivityInfos">Prix : 8 euros\nLocal : A21</string>
+</resources>

@@ -26,6 +26,8 @@ Aucune sécurité n'est mise en place pour protéger les listes, afin de facilit
 
 ## Serveur
 
+Le serveur est déployé et disponible à l'adresse suivante : [http://shoppinglist.aamulumi.info](http://shoppinglist.aamulumi.info)
+
 ### Format des messages
 
 Tous les messages renvoyés par le serveur sont des objets JSON et suivent la syntaxe suivante :

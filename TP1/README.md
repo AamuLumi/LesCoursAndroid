@@ -2,6 +2,11 @@
 
 Le but de ce TP est de créer une application de **listes de courses partagées**.  
 
+Vous pouvez, au choix : 
+- utiliser le squelette de l'application présent dans le répertoire ./SharedShopping
+- créer une application from scratch
+- créer une application et utiliser certaines classes du squelette
+
 ## Objectifs
 
 Les fonctionnalités cochées sont les fonctionnalités présentes dans le squelette de l'application.
@@ -89,7 +94,7 @@ Search a ShoppingList with a specific ID or a specific name
 
 | Name | Description | Type |
 | --- | --- | --- |
-| id || name | Id || Name of the Shopping List | MongoID || String |
+| id / name | Id / Name of the Shopping List | MongoID / String |
 
 ##### Body Parameters
 
@@ -136,8 +141,8 @@ Add a new item to a ShoppingList
 | Name | Needed | Description | Type |
 | --- | --- | --- | --- |
 | name | Yes | Name of the item to create | String |
-| quantity | No | Name || New quantity of item | Number |
-| price | No | Name || New price of item | Number |
+| quantity | No | New quantity of item | Number |
+| price | No | New price of item | Number |
 
 ##### Data returned
 
@@ -158,9 +163,9 @@ Update datas of an item of ShoppingList
 
 | Name | Needed | Description | Type |
 | --- | --- | --- | --- |
-| name || id | Yes | Name || Id of the item to update | String || MongoID |
-| quantity | No | Name || New quantity of item | Number |
-| price | No | Name || New price of item | Number |
+| name / id | Yes | Name / Id of the item to update | String || MongoID |
+| quantity | No | New quantity of item | Number |
+| price | No | New price of item | Number |
 
 ##### Data returned
 
@@ -181,7 +186,7 @@ Delete an item from a ShoppingList
 
 | Name | Needed | Description | Type |
 | --- | --- | --- | --- |
-| name || id | Yes | Name || Id of the item to delete | String || MongoID |
+| name / id | Yes | Name / Id of the item to delete | String / MongoID |
 
 ##### Data returned
 

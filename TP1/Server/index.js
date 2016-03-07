@@ -24,6 +24,8 @@ let app = express();
 let mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/shopping-api');
 
+let isMongooseId = require('mongoose').Types.ObjectId.isValid;
+
 let bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
   extended: true
@@ -51,14 +53,30 @@ app.get('/lists', (req, res) => {
 });
 
 app.get('/lists/:id', (req, res) => {
-  ShoppingList.findById(req.params.id, (err, sl) => {
-    if (err) {
-      resReturn(res, REQ_ERROR, SUC_ERR, err);
-    } else {
-      resReturn(res, REQ_OK, SUC_OK, sl,
-        'ShoppingList found');
-    }
-  });
+  if (isMongooseId(req.params.id)) {
+    ShoppingList.findById(req.params.id, (err, sl) => {
+      if (err) {
+        resReturn(res, REQ_ERROR, SUC_ERR, err);
+      } else {
+        resReturn(res, REQ_OK, SUC_OK, sl,
+          'ShoppingList found');
+      }
+    });
+  } else {
+    ShoppingList.findOne({
+      name : req.params.id
+    }, (err, sl) => {
+      if (err) {
+        resReturn(res, REQ_ERROR, SUC_ERR, err);
+      } else if (sl !== undefined && sl !== null){
+        resReturn(res, REQ_OK, SUC_OK, sl,
+          'ShoppingList found');
+      } else {
+        resReturn(res, REQ_NOT_FOUND, SUC_NOTFOUND, sl,
+          'ShoppingList not found');
+      }
+    });
+  }
 });
 
 app.post('/lists/:id', (req, res) => {

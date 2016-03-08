@@ -64,11 +64,11 @@ app.get('/lists/:id', (req, res) => {
     });
   } else {
     ShoppingList.findOne({
-      name : req.params.id
+      name: req.params.id
     }, (err, sl) => {
       if (err) {
         resReturn(res, REQ_ERROR, SUC_ERR, err);
-      } else if (sl !== undefined && sl !== null){
+      } else if (sl !== undefined && sl !== null) {
         resReturn(res, REQ_OK, SUC_OK, sl,
           'ShoppingList found');
       } else {
@@ -81,39 +81,48 @@ app.get('/lists/:id', (req, res) => {
 
 app.post('/lists/:id', (req, res) => {
   ShoppingList.findOne({
-    name : req.params.id
+    name: req.params.id
   }, (err, sl) => {
-    if (err) {
+    if (err || sl === null) {
       resReturn(res, REQ_NOT_FOUND, SUC_NOTFOUND, err);
 
       return;
     }
 
-    if ('item' in req.body) {
-      if (!('name' in req.body.item)) {
-        resReturn(res, REQ_BAD, SUC_INVPARAM, req.body.item,
-          'Error : missing name parameter in item');
+    if (!('name' in req.body)) {
+      resReturn(res, REQ_BAD, SUC_INVPARAM, req.body,
+        'Error : missing name parameter in item');
+
+      return;
+    }
+
+    for (let i of sl.items) {
+      if (i.name === req.body.name) {
+        resReturn(res, REQ_ERROR, SUC_EXIST, req.body,
+          'Error : item with this name already exists'
+        );
 
         return;
       }
-
-      for (let i of sl.items) {
-        if (i.name === req.body.item.name) {
-          resReturn(res, REQ_ERROR, SUC_EXIST, req.body.item,
-            'Error : item with this name already exists'
-          );
-
-          return;
-        }
-      }
-
-      if (req.body.item.quantity === undefined ||
-        req.body.item.quantity === 0) {
-        req.body.item.quantity = 1;
-      }
-
-      sl.items.push(req.body.item);
     }
+
+    if (req.body.quantity === undefined ||
+      req.body.quantity === 0) {
+      req.body.quantity = 1;
+    }
+
+    if (req.body.price === undefined ||
+      req.body.price === 0) {
+      req.body.price = 1;
+    }
+
+    let item = {
+      name : req.body.name,
+      quantity: req.body.quantity,
+      price: req.body.price
+    };
+
+    sl.items.push(item);
 
     sl.save((err) => {
       if (err) {
@@ -128,9 +137,9 @@ app.post('/lists/:id', (req, res) => {
 
 app.put('/lists/:id', (req, res) => {
   ShoppingList.findOne({
-    name : req.params.id
+    name: req.params.id
   }, (err, sl) => {
-    if (err) {
+    if (err || sl === null) {
       resReturn(res, REQ_NOT_FOUND, SUC_NOTFOUND, err);
 
       return;
@@ -166,9 +175,9 @@ app.put('/lists/:id', (req, res) => {
 
 app.delete('/lists/:id', (req, res) => {
   ShoppingList.findOne({
-    name : req.params.id
+    name: req.params.id
   }, (err, sl) => {
-    if (err) {
+    if (err || sl === null) {
       resReturn(res, REQ_NOT_FOUND, SUC_NOTFOUND, err);
       return;
     }

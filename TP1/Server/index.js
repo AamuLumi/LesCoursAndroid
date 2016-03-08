@@ -80,7 +80,9 @@ app.get('/lists/:id', (req, res) => {
 });
 
 app.post('/lists/:id', (req, res) => {
-  ShoppingList.findById(req.params.id, (err, sl) => {
+  ShoppingList.findOne({
+    name : req.params.id
+  }, (err, sl) => {
     if (err) {
       resReturn(res, REQ_NOT_FOUND, SUC_NOTFOUND, err);
 
@@ -125,7 +127,9 @@ app.post('/lists/:id', (req, res) => {
 });
 
 app.put('/lists/:id', (req, res) => {
-  ShoppingList.findById(req.params.id, (err, sl) => {
+  ShoppingList.findOne({
+    name : req.params.id
+  }, (err, sl) => {
     if (err) {
       resReturn(res, REQ_NOT_FOUND, SUC_NOTFOUND, err);
 
@@ -161,7 +165,9 @@ app.put('/lists/:id', (req, res) => {
 });
 
 app.delete('/lists/:id', (req, res) => {
-  ShoppingList.findById(req.params.id, (err, sl) => {
+  ShoppingList.findOne({
+    name : req.params.id
+  }, (err, sl) => {
     if (err) {
       resReturn(res, REQ_NOT_FOUND, SUC_NOTFOUND, err);
       return;

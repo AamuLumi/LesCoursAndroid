@@ -2,7 +2,7 @@
 
 Le but de ce TP est de créer une application de **listes de courses partagées**.  
 
-Vous pouvez, au choix : 
+Vous pouvez, au choix :
 - utiliser le squelette de l'application présent dans le répertoire ./SharedShopping
 - créer une application from scratch
 - créer une application et utiliser certaines classes du squelette
@@ -44,7 +44,7 @@ Tous les messages renvoyés par le serveur sont des objets JSON et suivent la sy
 - **data** correspond aux données renvoyées par le serveur
 - **message** contient le message de réussite ou non de la fonction
 
-**success** peut prendre les valeurs suivantes : 
+**success** peut prendre les valeurs suivantes :
 
 | Code | Description |
 | --- | --- |
@@ -128,7 +128,7 @@ Create a new ShoppingList
 - **ShoppingList object** if created
 - **error object** else
 
-#### POST /lists/:id
+#### POST /lists/:name
 
 Add a new item to a ShoppingList
 
@@ -136,7 +136,7 @@ Add a new item to a ShoppingList
 
 | Name | Description | Type |
 | --- | --- | --- |
-| id | Id of the Shopping List | MongoID |
+| name | Name of the Shopping List | String |
 
 ##### Body Parameters
 
@@ -151,7 +151,7 @@ Add a new item to a ShoppingList
 - **ShoppingList object** if created
 - **error object** else
 
-#### PUT /lists/:id
+#### PUT /lists/:name
 
 Update datas of an item of ShoppingList
 
@@ -159,13 +159,13 @@ Update datas of an item of ShoppingList
 
 | Name | Description | Type |
 | --- | --- | --- |
-| id | Id of the Shopping List | MongoID |
+| name | Name of the Shopping List | String |
 
 ##### Body Parameters
 
 | Name | Needed | Description | Type |
 | --- | --- | --- | --- |
-| name / id | Yes | Name / Id of the item to update | String || MongoID |
+| name | Yes | Name of the item to update | String |
 | quantity | No | New quantity of item | Number |
 | price | No | New price of item | Number |
 
@@ -174,7 +174,7 @@ Update datas of an item of ShoppingList
 - **ShoppingList object** if edited
 - **error object** else
 
-#### DELETE /lists/:id
+#### DELETE /lists/:name
 
 Delete an item from a ShoppingList
 
@@ -182,16 +182,15 @@ Delete an item from a ShoppingList
 
 | Name | Description | Type |
 | --- | --- | --- |
-| id | Id of the Shopping List | MongoID |
+| Name | Name of the Shopping List | String |
 
 ##### Body Parameters
 
 | Name | Needed | Description | Type |
 | --- | --- | --- | --- |
-| name / id | Yes | Name / Id of the item to delete | String / MongoID |
+| name | Yes | Name of the item to delete | String |
 
 ##### Data returned
 
 - **ShoppingList object** if deleted
 - **error object** else
-

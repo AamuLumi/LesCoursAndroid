@@ -79,9 +79,9 @@ app.get('/lists/:id', (req, res) => {
   }
 });
 
-app.post('/lists/:id', (req, res) => {
+app.post('/lists/:name', (req, res) => {
   ShoppingList.findOne({
-    name: req.params.id
+    name: req.params.name
   }, (err, sl) => {
     if (err || sl === null) {
       resReturn(res, REQ_NOT_FOUND, SUC_NOTFOUND, err);
@@ -111,13 +111,12 @@ app.post('/lists/:id', (req, res) => {
       req.body.quantity = 1;
     }
 
-    if (req.body.price === undefined ||
-      req.body.price === 0) {
-      req.body.price = 1;
+    if (req.body.price === undefined) {
+      req.body.price = 0;
     }
 
     let item = {
-      name : req.body.name,
+      name: req.body.name,
       quantity: req.body.quantity,
       price: req.body.price
     };
@@ -135,9 +134,9 @@ app.post('/lists/:id', (req, res) => {
   });
 });
 
-app.put('/lists/:id', (req, res) => {
+app.put('/lists/:name', (req, res) => {
   ShoppingList.findOne({
-    name: req.params.id
+    name: req.params.name
   }, (err, sl) => {
     if (err || sl === null) {
       resReturn(res, REQ_NOT_FOUND, SUC_NOTFOUND, err);
@@ -145,20 +144,16 @@ app.put('/lists/:id', (req, res) => {
       return;
     }
 
-    if ('item' in req.body) {
-      for (let i of sl.items) {
-        if (i.id === req.body.item.id || i.name ===
-          req.body.item.name) {
-          if ('name' in req.body.item) {
-            i.name = req.body.item.name;
-          }
-          if ('price' in req.body.item) {
-            i.price = req.body.item.price;
-          }
-          if ('quantity' in req.body.item) {
-            i.quantity = req.body.item.quantity;
-          }
+    for (let i of sl.items) {
+      if (i.name === req.body.name) {
+        if ('price' in req.body) {
+          i.price = req.body.price;
         }
+        if ('quantity' in req.body) {
+          i.quantity = req.body.quantity;
+        }
+
+        break;
       }
     }
 
@@ -173,9 +168,9 @@ app.put('/lists/:id', (req, res) => {
   });
 });
 
-app.delete('/lists/:id', (req, res) => {
+app.delete('/lists/:name', (req, res) => {
   ShoppingList.findOne({
-    name: req.params.id
+    name: req.params.name
   }, (err, sl) => {
     if (err || sl === null) {
       resReturn(res, REQ_NOT_FOUND, SUC_NOTFOUND, err);
@@ -184,19 +179,12 @@ app.delete('/lists/:id', (req, res) => {
 
     let itemFound = false;
 
-    if ('item' in req.body) {
-      for (let i = 0; i < sl.items.length; i++) {
-        if (sl.items[i].id === req.body.item.id) {
-          sl.items.splice(i, 1);
-          itemFound = true;
+    for (let i = 0; i < sl.items.length; i++) {
+      if (sl.items[i].name === req.body.name) {
+        sl.items.splice(i, 1);
+        itemFound = true;
 
-          break;
-        } else if (sl.items[i].name === req.body.item.name) {
-          sl.items.splice(i, 1);
-          itemFound = true;
-
-          break;
-        }
+        break;
       }
     }
 

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">SharedShopping</string>
+    <string name="mainActivityButtonCreate">Créer une liste</string>
+    <string name="mainActivityButtonFind">Trouver une liste</string>
+    <string name="mainActivityDialogText">Nom de la liste ?</string>
+    <string name="mainActivityDialogYes">OK</string>
+    <string name="mainActivityDialogNo">Retour</string>
+    <string name="mainActivityDialogEditTextHint">Entrez le nom &#8230;</string>
+    <string name="mainActivityTaskCreateSuccess">Liste créée avec succès</string>
+    <string name="mainActivityTaskCreateFailed">Problème durant la création de la liste</string>
+    <string name="mainActivityTaskFindFailed">Liste non trouvée</string>
+    <string name="mainActivityTaskCreateProgressMessage">Création de la liste</string>
+    <string name="mainActivityTaskFindProgressMessage">Chargement de la liste</string>
+    <string name="listAdapterShoppingItemsButtonAdd">+</string>
+    <string name="listAdapterShoppingListItemsRemove">-</string>
+    <string name="addShoppingListItemActivityTitle">Nouvel article</string>
+    <string name="addShoppingListItemActivityTextViewName">Nom</string>
+    <string name="addShoppingListItemActivityTextViewQuantity">Quantité</string>
+    <string name="addShoppingListItemActivityTextViewPrice">Prix</string>
+    <string name="addShoppingListItemActivityButtonCreate">Ajouter l\'article</string>
+    <string name="activityShoppingListMenuAdd">Ajouter un article</string>
+    <string name="activityShoppingListContextMenuRemove">Supprimer l\'article</string>
+</resources>
